@@ -1,4 +1,38 @@
-import type { Asset } from '@/types';
+import type { Asset, RiskLevel } from '@/types';
+
+export const RISK_COLORS: Record<RiskLevel, string> = {
+  'Low': '#34d399',
+  'Moderate': '#f5c842',
+  'High': '#f97316',
+  'Very High': '#f5475b',
+};
+
+/** Per-asset risk overrides (when asset risk differs from subcategory default) */
+export const ASSET_RISK_OVERRIDE: Record<string, RiskLevel> = {
+  // Indian Indices — some are higher risk than the "Moderate" subcategory default
+  'NSE:MID150': 'High',
+  'NSE:SML250': 'Very High',
+  'NSE:METAL':  'High',
+  'NSE:REALTY': 'High',
+  // Gold subcategory is Moderate, but miners are High
+  'GDX':  'High',
+  'GDXJ': 'Very High',
+  'MCX:GOLD': 'High',
+  // Silver miners
+  'PAAS': 'High',
+  'MCX:SILVER': 'High',
+  // US Stocks — Tesla/Nvidia are higher risk
+  'TSLA': 'Very High',
+  'NVDA': 'High',
+  // Mutual Funds — credit risk fund is higher
+  'MF-CR': 'Moderate',
+  // Bonds — TLT has duration risk
+  'TLT': 'Moderate',
+  // Oil stocks in MCX
+  'UCO': 'Very High',
+  // Crypto — DOGE is extra risky
+  'DOGE': 'Very High',
+};
 
 export const TIMEFRAME_LABELS = ['1D', '1W', '1M', '1Y', '3Y', '5Y'] as const;
 

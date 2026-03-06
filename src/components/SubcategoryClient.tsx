@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import type { Subcategory } from '@/types';
+import type { Asset, Subcategory } from '@/types';
+import { ASSET_INFO } from '@/data/asset-info';
+import AssetModal from './AssetModal';
 import {
   TIMEFRAME_LABELS,
   sign,
@@ -9,6 +11,8 @@ import {
   returnArrow,
   formatPrice,
   generateSparkline,
+  RISK_COLORS,
+  ASSET_RISK_OVERRIDE,
 } from '@/lib/utils';
 
 interface Props {
@@ -17,6 +21,7 @@ interface Props {
 
 export default function SubcategoryClient({ subcategory }: Props) {
   const [timeframeIndex, setTimeframeIndex] = useState(0);
+  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
 
   const returns = subcategory.assets.map((a) => a.returns[timeframeIndex]);
   const avg = returns.reduce((a, b) => a + b, 0) / returns.length;
@@ -131,13 +136,26 @@ export default function SubcategoryClient({ subcategory }: Props) {
             cls === 'atu' ? '#22d47e' : cls === 'atd' ? '#f5475b' : '#f5c842';
           const sparkPoints = generateSparkline(asset.symbol, ret);
 
+          const assetRisk = ASSET_RISK_OVERRIDE[asset.symbol] ?? subcategory.risk;
+
           return (
-            <div key={asset.symbol + asset.name} className={`at ${cls}`}>
+            <div key={asset.symbol + asset.name} className={`at ${cls}`} onClick={() => setSelectedAsset(asset)}>
               <div className="at-ln" />
               <div className="at-hd">
                 <div>
                   <div className="at-name">{asset.name}</div>
-                  <div className="at-sym">{asset.symbol}</div>
+                  <div className="at-sym-row">
+                    <span className="at-sym">{asset.symbol}</span>
+                    <span
+                      className="risk-tag at-risk"
+                      style={{
+                        background: `${RISK_COLORS[assetRisk]}14`,
+                        color: RISK_COLORS[assetRisk],
+                      }}
+                    >
+                      {assetRisk}
+                    </span>
+                  </div>
                 </div>
                 <div className="at-dir">{returnArrow(ret)}</div>
               </div>
@@ -164,6 +182,15 @@ export default function SubcategoryClient({ subcategory }: Props) {
           );
         })}
       </div>
+
+      {selectedAsset && (
+        <AssetModal
+          asset={selectedAsset}
+          info={ASSET_INFO[selectedAsset.symbol]}
+          risk={ASSET_RISK_OVERRIDE[selectedAsset.symbol] ?? subcategory.risk}
+          onClose={() => setSelectedAsset(null)}
+        />
+      )}
     </>
   );
 }

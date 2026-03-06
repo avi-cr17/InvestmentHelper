@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Subcategory } from '@/types';
+import { RISK_COLORS } from '@/lib/utils';
 
 interface Props {
   subcategory: Subcategory;
@@ -21,11 +22,22 @@ export default function SubcategoryCard({ subcategory, categoryId, index }: Prop
         >
           {subcategory.icon}
         </div>
-        <div
-          className="scc-badge"
-          style={{ background: `${subcategory.color}18`, color: subcategory.color }}
-        >
-          {subcategory.badge}
+        <div className="scc-top-right">
+          <span
+            className="risk-tag"
+            style={{
+              background: `${RISK_COLORS[subcategory.risk]}18`,
+              color: RISK_COLORS[subcategory.risk],
+            }}
+          >
+            {subcategory.risk}
+          </span>
+          <div
+            className="scc-badge"
+            style={{ background: `${subcategory.color}18`, color: subcategory.color }}
+          >
+            {subcategory.badge}
+          </div>
         </div>
       </div>
       <div className="scc-title">{subcategory.title}</div>

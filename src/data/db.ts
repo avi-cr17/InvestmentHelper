@@ -18,6 +18,7 @@ export const DB: { categories: Category[] } = {
           badge: 'NSE · BSE',
           color: '#4f8ef7',
           desc: "India's benchmark indices tracking top listed companies across caps and sectors.",
+          risk: 'Moderate',
           items: ['NIFTY 50', 'SENSEX', 'BANK NIFTY', 'NIFTY IT', 'MIDCAP 150', 'SMALLCAP'],
           assets: [
             { name: 'NIFTY 50',          symbol: 'NSE:NIFTY',   price: 23450, returns: [0.82,  1.4,  2.1, 14.5,  42.1,  88.3] },
@@ -41,6 +42,7 @@ export const DB: { categories: Category[] } = {
           badge: 'Large Cap',
           color: '#22d47e',
           desc: "India's 50 largest, most liquid companies. The gold standard of large cap investing.",
+          risk: 'Moderate',
           items: ['Reliance', 'TCS', 'HDFC Bank', 'Infosys', 'ICICI Bank', 'SBI', 'Bajaj Finance', 'L&T'],
           assets: [
             { name: 'Reliance Ind.',   symbol: 'RELIANCE',   price: 2845, returns: [1.2,  2.4,  5.2, 18.3,  45.2, 120.4] },
@@ -68,6 +70,7 @@ export const DB: { categories: Category[] } = {
           badge: 'Mid Cap',
           color: '#f5c842',
           desc: 'High-growth mid-sized companies — the sweet spot of risk and return in India.',
+          risk: 'High',
           items: ['Dixon', 'Polycab', 'Persistent', 'BSE Ltd', 'Kaynes', 'Trent'],
           assets: [
             { name: 'Dixon Technologies', symbol: 'DIXON',      price: 14820, returns: [2.4, 5.8, 18.2, 145.4, 380.2, 820.4] },
@@ -89,6 +92,7 @@ export const DB: { categories: Category[] } = {
           badge: 'NYSE · NASDAQ',
           color: '#60a5fa',
           desc: 'Americas benchmark indices. Access via INDmoney, Vested or International Mutual Funds.',
+          risk: 'Moderate',
           items: ['S&P 500', 'NASDAQ 100', 'Dow Jones', 'Russell 2000', 'VOO', 'QQQ'],
           assets: [
             { name: 'S&P 500',          symbol: 'SPX',     price:  5890, returns: [0.44, 1.1,  3.2, 24.5, 45.2,  95.8], usd: true },
@@ -108,6 +112,7 @@ export const DB: { categories: Category[] } = {
           badge: 'LRS Route',
           color: '#4f8ef7',
           desc: 'Direct US stock investing via LRS route. Own Apple, Google, Nvidia from India.',
+          risk: 'High',
           items: ['Apple', 'Microsoft', 'Nvidia', 'Alphabet', 'Meta', 'Amazon'],
           assets: [
             { name: 'Apple',       symbol: 'AAPL',  price: 218.4, returns: [0.6,  1.4,  4.2,  28.4,  48.2,  280.4], usd: true },
@@ -127,6 +132,7 @@ export const DB: { categories: Category[] } = {
           badge: 'SEBI Regulated',
           color: '#22d47e',
           desc: 'Professionally managed diversified funds. SIP-friendly. Regulated by SEBI.',
+          risk: 'Moderate',
           items: ['Large Cap', 'Mid Cap', 'Flexi Cap', 'ELSS', 'Index', 'International'],
           assets: [
             { name: 'Mirae Large Cap',      symbol: 'MF-LC',  price: 128.4, returns: [0.6, 1.2, 2.8, 16.4, 42.4,  88.2] },
@@ -146,6 +152,7 @@ export const DB: { categories: Category[] } = {
           badge: 'Dividend Income',
           color: '#e879f9',
           desc: 'Real estate and infrastructure trusts. Regular income + equity-like growth.',
+          risk: 'Moderate',
           items: ['Embassy REIT', 'Mindspace', 'Nexus REIT', 'IndiGrid', 'PowerGrid InvIT'],
           assets: [
             { name: 'Embassy REIT',   symbol: 'EMBASSY',  price: 384.2, returns: [0.4, 0.8, 2.4,  8.2, 28.4,  62.4] },
@@ -175,6 +182,7 @@ export const DB: { categories: Category[] } = {
           badge: 'MCX · NSE · LRS',
           color: '#e8b84b',
           desc: "India's favourite commodity. 8 distinct investment routes — from SGBs to US mining ETFs.",
+          risk: 'Moderate',
           items: ['SGB', 'Gold ETF', 'MCX Futures', 'Digital Gold', 'GDX', 'GDXJ'],
           assets: [
             { name: 'Sovereign Gold Bond', symbol: 'SGB',      price:  6248, returns: [0.4, 1.2, 3.8, 14.2, 42.1,  88.4] },
@@ -194,6 +202,7 @@ export const DB: { categories: Category[] } = {
           badge: 'MCX · NSE · LRS',
           color: '#94a3b8',
           desc: 'Silver ETF launched in India (2022). Massive awareness gap — this is a huge content opportunity.',
+          risk: 'High',
           items: ['Silver ETF', 'MCX Silver', 'SLV', 'PAAS', 'WPM'],
           assets: [
             { name: 'Mirae Silver ETF',    symbol: 'SILVERIETF',  price: 92.4,  returns: [0.8, 2.4,  6.2, 24.8, 62.4, 140.2] },
@@ -212,6 +221,7 @@ export const DB: { categories: Category[] } = {
           badge: 'MCX · US Only',
           color: '#f97316',
           desc: "No direct Indian ETF exists for copper. MCX futures or US-listed COPX/CPER are the only routes.",
+          risk: 'High',
           items: ['MCX Copper', 'COPX', 'CPER', 'FCX', 'SCCO'],
           assets: [
             { name: 'MCX Copper Futures',      symbol: 'MCX:COPPER', price: 842.5, returns: [-0.8,-2.4, -4.2, 12.4,  48.2,  88.4] },
@@ -228,6 +238,7 @@ export const DB: { categories: Category[] } = {
           badge: 'MCX · Volatile',
           color: '#f5475b',
           desc: 'Highly volatile. Best accessed via MCX futures or US oil ETFs through the LRS route.',
+          risk: 'Very High',
           items: ['MCX Crude', 'USO', 'UCO', 'ONGC', 'BPCL'],
           assets: [
             { name: 'MCX Crude Oil',      symbol: 'MCX:CRUDE', price:  6842, returns: [-1.2,-3.4, -6.8,  8.4, 22.4,  48.4] },
@@ -245,6 +256,7 @@ export const DB: { categories: Category[] } = {
           badge: 'NCDEX · MCX',
           color: '#22d47e',
           desc: 'Highly seasonal and volatile commodities. Educational awareness — not for most retail investors.',
+          risk: 'Very High',
           items: ['Soybean', 'Jeera', 'Cotton', 'Castor', 'Wheat'],
           assets: [
             { name: 'MCX Soybean',        symbol: 'MCX:SOYA',      price:  4248, returns: [-2.4,-6.8, -8.4, 12.4, 22.4,  42.4] },
@@ -273,6 +285,7 @@ export const DB: { categories: Category[] } = {
           badge: 'Govt Backed',
           color: '#34d399',
           desc: 'Government-backed savings instruments with guaranteed returns. Lowest risk in all of investing.',
+          risk: 'Low',
           items: ['Bank FD', 'PPF', 'NSC', 'SCSS', 'RBI Bond', 'SSY'],
           assets: [
             { name: 'SBI Bank FD (1Y)',   symbol: 'FD',      price: 100, returns: [0.017, 0.067, 0.55, 6.8,  7.0,  7.0] },
@@ -292,6 +305,7 @@ export const DB: { categories: Category[] } = {
           badge: 'RBI · SEBI',
           color: '#4f8ef7',
           desc: 'Fixed coupon instruments. G-Secs are the safest; corporate bonds offer higher yield.',
+          risk: 'Low',
           items: ['G-Sec 10Y', 'T-Bills', 'Bharat Bond ETF', 'AAA Corp Bonds'],
           assets: [
             { name: 'G-Sec 10Y',       symbol: 'IN10Y',    price:   6.72, returns: [0.01, 0.02, 0.15, 6.72, 6.72, 6.72], pct: true },
@@ -310,6 +324,7 @@ export const DB: { categories: Category[] } = {
           badge: 'SEBI · AMC',
           color: '#22d47e',
           desc: 'Professionally managed debt portfolios. Often more tax-efficient than FDs.',
+          risk: 'Low',
           items: ['Liquid', 'Ultra Short', 'Short Duration', 'Dynamic Bond', 'Credit Risk'],
           assets: [
             { name: 'HDFC Liquid Fund',     symbol: 'MF-LQ', price: 4284, returns: [0.019,0.075, 0.59, 7.2, 18.4, 38.4] },
@@ -339,6 +354,7 @@ export const DB: { categories: Category[] } = {
           badge: 'CoinDCX · WazirX',
           color: '#f7931a',
           desc: 'Direct ownership of digital assets. Buy and hold BTC, ETH or altcoins via Indian or international exchanges.',
+          risk: 'Very High',
           items: ['Bitcoin', 'Ethereum', 'Dogecoin'],
           assets: [
             { name: 'Bitcoin',  symbol: 'BTC',  price: 98240, returns: [1.2,  3.4,  8.2, 120.4, 280.4,  880.8], usd: true },
@@ -353,6 +369,7 @@ export const DB: { categories: Category[] } = {
           badge: 'CME · Derivatives',
           color: '#8b5cf6',
           desc: 'Bitcoin futures contracts. CME futures available to Indian investors via LRS route through international brokers.',
+          risk: 'Very High',
           items: ['CME BTC Futures', 'BITO', 'BTF'],
           assets: [
             { name: 'CME BTC Futures',     symbol: 'BTC1!', price: 98640, returns: [1.2, 3.4, 8.4, 122.4, 282.4, 884.8], usd: true },
@@ -367,6 +384,7 @@ export const DB: { categories: Category[] } = {
           badge: 'SEC Approved · 2024',
           color: '#22d47e',
           desc: 'SEC-approved spot Bitcoin ETFs launched Jan 2024. Access via LRS route through INDmoney or Vested.',
+          risk: 'Very High',
           items: ['IBIT', 'FBTC', 'BITB', 'HODL'],
           assets: [
             { name: 'IBIT — BlackRock', symbol: 'IBIT', price: 52.84, returns: [1.2, 3.4, 8.2, 120.4, 0.0, 0.0], usd: true },

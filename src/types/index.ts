@@ -1,3 +1,5 @@
+export type RiskLevel = 'Low' | 'Moderate' | 'High' | 'Very High';
+
 export interface Asset {
   name: string;
   symbol: string;
@@ -17,8 +19,16 @@ export interface Subcategory {
   badge: string;
   color: string;
   desc: string;
+  risk: RiskLevel;
   items: string[];
   assets: Asset[];
+}
+
+export interface AssetInfo {
+  description: string;
+  howToInvest: string;
+  pros: [string, string, string];
+  cons: [string, string, string];
 }
 
 export interface Category {
