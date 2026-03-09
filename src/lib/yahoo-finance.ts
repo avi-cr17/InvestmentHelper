@@ -10,8 +10,7 @@ async function getYF() {
   if (!_yf) {
     // Dynamic require to bypass Next.js bundler
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const YahooFinance = require('yahoo-finance2').default;
-    _yf = new YahooFinance({ suppressNotices: ['yahooSurvey'] });
+    _yf = require('yahoo-finance2').default;
   }
   return _yf;
 }
@@ -170,19 +169,24 @@ export async function getEnrichedDB() {
     return { categories: DB.categories };
   }
 
-  const usdInrRate = await getUsdInrRate();
+  try {
+    const usdInrRate = await getUsdInrRate();
 
-  const enrichedCategories = await Promise.all(
-    DB.categories.map(async (category) => ({
-      ...category,
-      subcats: await Promise.all(
-        category.subcats.map(async (subcat) => ({
-          ...subcat,
-          assets: await enrichAssetsWithLiveData(subcat.assets, usdInrRate),
-        }))
-      ),
-    }))
-  );
+    const enrichedCategories = await Promise.all(
+      DB.categories.map(async (category) => ({
+        ...category,
+        subcats: await Promise.all(
+          category.subcats.map(async (subcat) => ({
+            ...subcat,
+            assets: await enrichAssetsWithLiveData(subcat.assets, usdInrRate),
+          }))
+        ),
+      }))
+    );
 
-  return { categories: enrichedCategories };
+    return { categories: enrichedCategories };
+  } catch (error) {
+    console.error('[yahoo-finance] Enrichment failed, using static data:', error);
+    return { categories: DB.categories };
+  }
 }
