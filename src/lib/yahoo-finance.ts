@@ -10,7 +10,8 @@ async function getYF() {
   if (!_yf) {
     // Dynamic require to bypass Next.js bundler
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    _yf = require('yahoo-finance2').default;
+    const YahooFinance = require('yahoo-finance2').default;
+    _yf = new YahooFinance({ suppressNotices: ['yahooSurvey'] });
   }
   return _yf;
 }
