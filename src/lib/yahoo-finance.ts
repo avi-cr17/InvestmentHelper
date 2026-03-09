@@ -43,12 +43,20 @@ async function getUsdInrRate(): Promise<number> {
   }
 }
 
+/** Race a promise against a timeout */
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error('timeout')), ms)),
+  ]);
+}
+
 /** Fetch current price + compute period returns for a single Yahoo symbol */
 async function fetchSingleAsset(yahooSymbol: string): Promise<QuoteResult | null> {
   try {
     const yf = await getYF();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const quote: any = await yf.quote(yahooSymbol);
+    const quote: any = await withTimeout(yf.quote(yahooSymbol), 5000);
     if (!quote) return null;
     const currentPrice: number | undefined = quote.regularMarketPrice;
     if (!currentPrice) return null;
@@ -58,10 +66,10 @@ async function fetchSingleAsset(yahooSymbol: string): Promise<QuoteResult | null
     fiveYearsAgo.setDate(fiveYearsAgo.getDate() - 10);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const chart: any = await yf.chart(yahooSymbol, {
+    const chart: any = await withTimeout(yf.chart(yahooSymbol, {
       period1: fiveYearsAgo,
       interval: '1d',
-    });
+    }), 5000);
 
     const quotes = chart.quotes;
     if (!quotes || quotes.length === 0) return null;
@@ -164,6 +172,21 @@ export async function enrichAssetsWithLiveData(
   }
 
   return results;
+}
+
+/** Enrich a single subcategory's assets with live data */
+export async function enrichSubcategory(
+  subcategory: import('@/types').Subcategory
+): Promise<import('@/types').Subcategory> {
+  if (isBuildTime()) return subcategory;
+  try {
+    const usdInrRate = await getUsdInrRate();
+    const assets = await enrichAssetsWithLiveData(subcategory.assets, usdInrRate);
+    return { ...subcategory, assets };
+  } catch (error) {
+    console.error('[yahoo-finance] Subcategory enrichment failed:', error);
+    return subcategory;
+  }
 }
 
 /** Enrich the entire DB with live data */
